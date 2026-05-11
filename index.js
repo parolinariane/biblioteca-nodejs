@@ -6,9 +6,6 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-// ==========================================
-// FUNÇÃO: CALCULAR MULTA
-// ==========================================
 function calcularMulta(diasAtraso) {
   if (diasAtraso === 0) {
     return 0;
@@ -17,9 +14,6 @@ function calcularMulta(diasAtraso) {
   }
 }
 
-// ==========================================
-// FUNÇÃO: CALCULAR QUANTIDADE DE LIVROS
-// ==========================================
 function calcularQuantidadeLivros(meuRA) {
   let quantidadeLivros = parseInt(meuRA.slice(-1));
 
@@ -30,9 +24,6 @@ function calcularQuantidadeLivros(meuRA) {
   return quantidadeLivros;
 }
 
-// ==========================================
-// FUNÇÃO: MOSTRAR CABEÇALHO
-// ==========================================
 function mostrarCabecalho(nomeAluno, meuRA, diasAtraso) {
 
   console.log(
@@ -48,9 +39,6 @@ function mostrarCabecalho(nomeAluno, meuRA, diasAtraso) {
   console.log(chalk.gray("-----------------------------------------"));
 }
 
-// ==========================================
-// FUNÇÃO: PROCESSAR LIVROS
-// ==========================================
 function processarLivros(quantidadeLivros) {
 
   console.log(
@@ -70,9 +58,6 @@ function processarLivros(quantidadeLivros) {
   }
 }
 
-// ==========================================
-// FUNÇÃO: REGISTRAR DEVOLUÇÃO
-// ==========================================
 function registrarDevolucao() {
 
   rl.question(
@@ -137,9 +122,6 @@ function registrarDevolucao() {
 
 }
 
-// ==========================================
-// MENU PRINCIPAL
-// ==========================================
 function menuPrincipal() {
 
   console.log(
@@ -200,7 +182,4 @@ function menuPrincipal() {
 
 }
 
-// ==========================================
-// INICIAR SISTEMA
-// ==========================================
 menuPrincipal();
