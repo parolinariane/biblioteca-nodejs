@@ -3,7 +3,8 @@
 // ==========================================
 const nomeAluno = "Ariane Parolin Calarga";
 const meuRA = "2253188"; 
-let diasAtraso = 0; 
+//let diasAtraso = 0; 
+let diasAtraso = 5; 
 
 let valorMulta = 0;
 
