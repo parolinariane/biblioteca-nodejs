@@ -28,7 +28,7 @@ Projeto desenvolvido em JavaScript + Node.js para praticar lógica de programaç
 Clone o repositório:
 
 ```bash
-git clone URL_DO_REPOSITORIO
+git clone https://github.com/parolinariane/biblioteca-nodejs.git
 ```
 
 Acesse a pasta:
