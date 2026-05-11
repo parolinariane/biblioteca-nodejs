@@ -5,6 +5,41 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+function calcularMulta(diasAtraso) {
+  if (diasAtraso === 0) {
+    return 0;
+  } else {
+    return 10;
+  }
+}
+
+function calcularQuantidadeLivros(meuRA) {
+  let quantidadeLivros = parseInt(meuRA.slice(-1));
+
+  if (quantidadeLivros === 0) {
+    quantidadeLivros = 3;
+  }
+
+  return quantidadeLivros;
+}
+
+function mostrarCabecalho(nomeAluno, meuRA, diasAtraso) {
+  console.log("\n=== Sistema da Biblioteca Universitária ===");
+  console.log("Aluno: " + nomeAluno);
+  console.log("RA: " + meuRA);
+  console.log("Dias de Atraso: " + diasAtraso);
+  console.log("-----------------------------------------");
+}
+
+function processarLivros(quantidadeLivros) {
+  console.log("Processando devolução de " + quantidadeLivros + " livro(s)...\n");
+
+  for (let i = 1; i <= quantidadeLivros; i++) {
+    console.log("Livro " + i + " devolvido com sucesso.");
+  }
+}
+
+
 rl.question("Digite o nome do aluno: ", function(nomeAluno) {
 
   rl.question("Digite o RA: ", function(meuRA) {
@@ -13,44 +48,15 @@ rl.question("Digite o nome do aluno: ", function(nomeAluno) {
 
       diasAtraso = parseInt(diasAtraso);
 
-      let valorMulta = 0;
+      const valorMulta = calcularMulta(diasAtraso);
+      const quantidadeLivros = calcularQuantidadeLivros(meuRA);
 
-      // Extração do último dígito do RA
-      let quantidadeLivros = parseInt(meuRA.slice(-1));
-
-      // Se terminar em 0 → processa 3 livros
-      if (quantidadeLivros === 0) {
-        quantidadeLivros = 3;
-      }
-
-      console.log("\n=== Sistema da Biblioteca Universitária ===");
-      console.log("Aluno: " + nomeAluno);
-      console.log("RA: " + meuRA);
-      console.log("Dias de Atraso: " + diasAtraso);
-      console.log("-----------------------------------------");
-
-      // ==========================================
-      // ESTRUTURA CONDICIONAL
-      // ==========================================
-
-      if (diasAtraso === 0) {
-        valorMulta = 0;
-      } else {
-        valorMulta = 10;
-      }
+      mostrarCabecalho(nomeAluno, meuRA, diasAtraso);
 
       console.log("Valor da Multa: R$ " + valorMulta);
-
       console.log("-----------------------------------------");
-      console.log("Processando devolução de " + quantidadeLivros + " livro(s)...\n");
 
-      // ==========================================
-      // LAÇO DE REPETIÇÃO
-      // ==========================================
-
-      for (let i = 1; i <= quantidadeLivros; i++) {
-        console.log("Livro " + i + " devolvido com sucesso.");
-      }
+      processarLivros(quantidadeLivros);
 
       rl.close();
 
