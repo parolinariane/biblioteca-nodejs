@@ -39,29 +39,67 @@ function processarLivros(quantidadeLivros) {
   }
 }
 
+function registrarDevolucao() {
 
-rl.question("Digite o nome do aluno: ", function(nomeAluno) {
+  rl.question("\nDigite o nome do aluno: ", function(nomeAluno) {
 
-  rl.question("Digite o RA: ", function(meuRA) {
+    rl.question("Digite o RA: ", function(meuRA) {
 
-    rl.question("Digite os dias de atraso: ", function(diasAtraso) {
+      rl.question("Digite os dias de atraso: ", function(diasAtraso) {
 
-      diasAtraso = parseInt(diasAtraso);
+        diasAtraso = parseInt(diasAtraso);
 
-      const valorMulta = calcularMulta(diasAtraso);
-      const quantidadeLivros = calcularQuantidadeLivros(meuRA);
+        const valorMulta = calcularMulta(diasAtraso);
+        const quantidadeLivros = calcularQuantidadeLivros(meuRA);
 
-      mostrarCabecalho(nomeAluno, meuRA, diasAtraso);
+        mostrarCabecalho(nomeAluno, meuRA, diasAtraso);
 
-      console.log("Valor da Multa: R$ " + valorMulta);
-      console.log("-----------------------------------------");
+        console.log("Valor da Multa: R$ " + valorMulta);
+        console.log("-----------------------------------------");
 
-      processarLivros(quantidadeLivros);
+        processarLivros(quantidadeLivros);
 
-      rl.close();
+        // Volta para o menu
+        menuPrincipal();
+
+      });
 
     });
 
   });
 
-});
+}
+
+function menuPrincipal() {
+
+  console.log("\n=================================");
+  console.log(" SISTEMA DA BIBLIOTECA ");
+  console.log("=================================");
+  console.log("1 - Registrar devolução");
+  console.log("2 - Sair");
+  console.log("=================================");
+
+  rl.question("Escolha uma opção: ", function(opcao) {
+
+    switch(opcao) {
+
+      case "1":
+        registrarDevolucao();
+        break;
+
+      case "2":
+        console.log("\nSistema encerrado.");
+        rl.close();
+        break;
+
+      default:
+        console.log("\nOpção inválida.");
+        menuPrincipal();
+        break;
+    }
+
+  });
+
+}
+
+menuPrincipal();
