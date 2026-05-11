@@ -1,10 +1,14 @@
 const readline = require("readline");
+const chalk = require("chalk").default;
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
+// ==========================================
+// FUNÇÃO: CALCULAR MULTA
+// ==========================================
 function calcularMulta(diasAtraso) {
   if (diasAtraso === 0) {
     return 0;
@@ -13,6 +17,9 @@ function calcularMulta(diasAtraso) {
   }
 }
 
+// ==========================================
+// FUNÇÃO: CALCULAR QUANTIDADE DE LIVROS
+// ==========================================
 function calcularQuantidadeLivros(meuRA) {
   let quantidadeLivros = parseInt(meuRA.slice(-1));
 
@@ -23,83 +30,177 @@ function calcularQuantidadeLivros(meuRA) {
   return quantidadeLivros;
 }
 
+// ==========================================
+// FUNÇÃO: MOSTRAR CABEÇALHO
+// ==========================================
 function mostrarCabecalho(nomeAluno, meuRA, diasAtraso) {
-  console.log("\n=== Sistema da Biblioteca Universitária ===");
-  console.log("Aluno: " + nomeAluno);
-  console.log("RA: " + meuRA);
-  console.log("Dias de Atraso: " + diasAtraso);
-  console.log("-----------------------------------------");
+
+  console.log(
+    chalk.blue.bold("\n=== Sistema da Biblioteca Universitária ===")
+  );
+
+  console.log(chalk.white("Aluno: ") + chalk.green(nomeAluno));
+
+  console.log(chalk.white("RA: ") + chalk.yellow(meuRA));
+
+  console.log(chalk.white("Dias de Atraso: ") + chalk.red(diasAtraso));
+
+  console.log(chalk.gray("-----------------------------------------"));
 }
 
+// ==========================================
+// FUNÇÃO: PROCESSAR LIVROS
+// ==========================================
 function processarLivros(quantidadeLivros) {
-  console.log("Processando devolução de " + quantidadeLivros + " livro(s)...\n");
+
+  console.log(
+    chalk.cyan(
+      "\nProcessando devolução de " +
+      quantidadeLivros +
+      " livro(s)...\n"
+    )
+  );
 
   for (let i = 1; i <= quantidadeLivros; i++) {
-    console.log("Livro " + i + " devolvido com sucesso.");
+
+    console.log(
+      chalk.green("✔ Livro " + i + " devolvido com sucesso.")
+    );
+
   }
 }
 
+// ==========================================
+// FUNÇÃO: REGISTRAR DEVOLUÇÃO
+// ==========================================
 function registrarDevolucao() {
 
-  rl.question("\nDigite o nome do aluno: ", function(nomeAluno) {
+  rl.question(
+    chalk.magenta("\nDigite o nome do aluno: "),
+    function(nomeAluno) {
 
-    rl.question("Digite o RA: ", function(meuRA) {
+      rl.question(
+        chalk.magenta("Digite o RA: "),
+        function(meuRA) {
 
-      rl.question("Digite os dias de atraso: ", function(diasAtraso) {
+          rl.question(
+            chalk.magenta("Digite os dias de atraso: "),
+            function(diasAtraso) {
 
-        diasAtraso = parseInt(diasAtraso);
+              diasAtraso = parseInt(diasAtraso);
 
-        const valorMulta = calcularMulta(diasAtraso);
-        const quantidadeLivros = calcularQuantidadeLivros(meuRA);
+              const valorMulta = calcularMulta(diasAtraso);
 
-        mostrarCabecalho(nomeAluno, meuRA, diasAtraso);
+              const quantidadeLivros =
+                calcularQuantidadeLivros(meuRA);
 
-        console.log("Valor da Multa: R$ " + valorMulta);
-        console.log("-----------------------------------------");
+              mostrarCabecalho(
+                nomeAluno,
+                meuRA,
+                diasAtraso
+              );
 
-        processarLivros(quantidadeLivros);
+              if (valorMulta === 0) {
 
-        // Volta para o menu
-        menuPrincipal();
+                console.log(
+                  chalk.green.bold(
+                    "Valor da Multa: R$ " + valorMulta
+                  )
+                );
 
-      });
+              } else {
 
-    });
+                console.log(
+                  chalk.red.bold(
+                    "Valor da Multa: R$ " + valorMulta
+                  )
+                );
 
-  });
+              }
+
+              console.log(
+                chalk.gray("-----------------------------------------")
+              );
+
+              processarLivros(quantidadeLivros);
+
+              menuPrincipal();
+
+            }
+          );
+
+        }
+      );
+
+    }
+  );
 
 }
 
+// ==========================================
+// MENU PRINCIPAL
+// ==========================================
 function menuPrincipal() {
 
-  console.log("\n=================================");
-  console.log(" SISTEMA DA BIBLIOTECA ");
-  console.log("=================================");
-  console.log("1 - Registrar devolução");
-  console.log("2 - Sair");
-  console.log("=================================");
+  console.log(
+    chalk.blue.bold("\n=================================")
+  );
 
-  rl.question("Escolha uma opção: ", function(opcao) {
+  console.log(
+    chalk.blue.bold(" SISTEMA DA BIBLIOTECA ")
+  );
 
-    switch(opcao) {
+  console.log(
+    chalk.blue.bold("=================================")
+  );
 
-      case "1":
-        registrarDevolucao();
-        break;
+  console.log(
+    chalk.yellow("1 - Registrar devolução")
+  );
 
-      case "2":
-        console.log("\nSistema encerrado.");
-        rl.close();
-        break;
+  console.log(
+    chalk.red("2 - Sair")
+  );
 
-      default:
-        console.log("\nOpção inválida.");
-        menuPrincipal();
-        break;
+  console.log(
+    chalk.blue.bold("=================================")
+  );
+
+  rl.question(
+    chalk.white("Escolha uma opção: "),
+    function(opcao) {
+
+      switch(opcao) {
+
+        case "1":
+          registrarDevolucao();
+          break;
+
+        case "2":
+
+          console.log(
+            chalk.red.bold("\nSistema encerrado.")
+          );
+
+          rl.close();
+          break;
+
+        default:
+
+          console.log(
+            chalk.red("\nOpção inválida.")
+          );
+
+          menuPrincipal();
+          break;
+      }
+
     }
-
-  });
+  );
 
 }
 
+// ==========================================
+// INICIAR SISTEMA
+// ==========================================
 menuPrincipal();
